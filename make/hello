@@ -1,0 +1,23 @@
+.RECIPEPREFIX = >
+#注释，自定义变量
+MyVars = Hello Make
+.PHONY: vars
+vars:
+> echo "target: $@, MyVars: $(MyVars), CC: $(CC), CXX: $(CXX), CFLAGS: $(CFLAGS), CPPFLAGS: $(CPPFLAGS)" \
+  #这是个注释啊   
+>  @# 这个注释不会打印  
+
+
+.ONESHELL:
+func: vars
+> echo " I am Func, I depdency $<"
+> OneSh="hello shell"  
+> echo -e "\nenen $${OneSh}" 
+
+control:
+> ifeq ($(CC),gcc) \
+>  libs="libs for gcc" \
+>  else  \
+>  libs="libs for normal" \
+> endif 
+
